@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Scrolling Cube - Stop at Left</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			background-color: #f0f0f0;
+			font-family: Arial, sans-serif;
+			overflow-x: hidden;
+		}
+
+		header,
+		footer {
+			background-color: #00aaff;
+			color: #fff;
+			height: 80rem;
+			display: flex;
+			align-items: center;
+		}
+
+		header h1,
+		footer h1 {
+			font-size: 40px;
+			margin: 20px auto;
+			text-align: center;
+		}
+
+
+		.cube-container {
+			perspective: 1500px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 400px;
+		}
+
+		.cube {
+			width: 300px;
+			height: 300px;
+			position: relative;
+			z-index: 3;
+			transform: rotate(0);
+			transform-style: preserve-3d;
+		}
+
+		.face {
+			position: absolute;
+			width: 300px;
+			height: 300px;
+			background-color: #00aaff;
+			display: flex;
+			justify-content: center;
+			font-size: 24px;
+			color: white;
+			opacity: 0.9;
+			border: 1px solid #fff;
+			flex-direction: column;
+			align-items: center;
+			padding: 25px;
+		}
+
+		.front {
+			transform: rotateY(0deg) translateZ(150px);
+		}
+
+		.back {
+			transform: rotateY(180deg) translateZ(150px);
+		}
+
+		.right {
+			transform: rotateY(90deg) translateZ(150px);
+		}
+
+		.left {
+			transform: rotateY(-90deg) translateZ(150px);
+		}
+
+		.top {
+			transform: rotateX(90deg) translateZ(150px);
+			background-color: #ffffff;
+		}
+
+		.bottom {
+			transform: rotateX(-90deg) translateZ(150px);
+			background-color: #ffffff;
+		}
+
+		.face p {
+			font-size: 15px;
+			text-align: center;
+		}
+
+		.c-head {
+			display: block;
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<h1>Header content</h1>
+	</header>
+	<div class="cube-container">
+		<div class="cube">
+			<div class="face front">
+				<h3 class="c-head">C Suite</h3>
+				<p>Our IT managed services empower top-level executives by providing strategic insights and reliable support to
+					drive organizational success through well-informed decision making. </p>
+			</div>
+			<div class="face back">
+				<h3 class="c-head">Operations Management</h3>
+				<p>We streamline operations by providing secure IT infrastructure solutions that optimize processes, cut costs
+					and ensure seamless day-to-day operations. </p>
+			</div>
+			<div class="face right">
+				<h3 class="c-head">IT Leadership</h3>
+				<p>We support IT leaders with state-of-the-art tools and proactive management services to bolster security,
+					enhance system performance and instill confidence in managing complex IT environments.</p>
+			</div>
+			<div class="face left">
+				<h3 class="c-head">Solutions</h3>
+				<p>Whether you're leading the C-suite, managing operations, or head of IT, Safebox has solutions tailored for
+					you. Reach out today to see how we can support your goals!</p>
+			</div>
+			<div class="face top"><img src="Safebox_Tech_Horizontal_Blue.png" alt="Safebox"></div>
+			<div class="face bottom"><img src="Safebox_Tech_Horizontal_Blue.png" alt="Safebox"></div>
+		</div>
+	</div>
+	<footer>
+		<h1>Footer content</h1>
+	</footer>
+
+
+	<!-- GSAP -->
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", (event) => {
+			gsap.registerPlugin(ScrollTrigger);
+			let cubeEdges = gsap.utils.toArray('.cube');
+			let cubeItemTL = gsap.timeline({
+				scrollTrigger: {
+					trigger: '.cube-container',
+					scrub: 1,
+					start: 'center center',
+					markers: true,
+					pin: true,
+					toggleActions: 'restart pause reverse pause'
+				}
+			});
+			cubeItemTL.fromTo(cubeEdges,
+				{
+					rotateY: 0,
+				},
+				{
+					rotateY: 270,
+				}
+			);
+		});
+	</script>
+
+</body>
+
+</html>
