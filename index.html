@@ -37,6 +37,8 @@
 
 		.cube-container {
 			perspective: 1500px;
+			perspective-origin: 50% -100px;
+			margin-bottom: 70px;
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -153,7 +155,6 @@
 					trigger: '.cube-container',
 					scrub: 1,
 					start: 'center center',
-					markers: true,
 					pin: true,
 					toggleActions: 'restart pause reverse pause'
 				}
